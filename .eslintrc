@@ -1,0 +1,86 @@
+{
+  "extends": ["react-app", "airbnb"],
+  "plugins": ["react", "import", "jsx-a11y"],
+  "rules": {
+    "implicit-arrow-linebreak": ["error", "beside"],
+    "import/extensions": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": 0,
+    "import/prefer-default-export": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/href-no-hash": [0],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "assert": "either",
+        "depth": 25
+      }
+    ],
+    "jsx-a11y/label-has-for": 0,
+    "linebreak-style": 0,
+    "no-restricted-exports": [0, { "restrictedNamedExports": ["default"] }],
+    "no-param-reassign": [
+      "error",
+      {
+        "ignorePropertyModificationsFor": [
+          "acc",
+          "accumulator",
+          "e",
+          "ctx",
+          "context",
+          "req",
+          "request",
+          "res",
+          "response",
+          "$scope",
+          "staticContext",
+          "state"
+        ],
+        "props": true
+      }
+    ],
+    "no-underscore-dangle": 0,
+    "no-use-before-define": [
+      "error", 
+      { 
+        "functions": false 
+      }
+    ],
+    "react/function-component-definition": [1, {
+      "namedComponents": "arrow-function",
+      "unnamedComponents": "arrow-function"
+    }],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "react/jsx-handler-names": "warn",
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-no-duplicate-props": [
+      2, 
+      { 
+        "ignoreCase": false
+      }
+    ],
+    "semi": [2, "never"]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
