@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { IMAGE_DATA, IMAGE_POSITIONS } from 'constants/puzzle'
 import useOutsideElementClick from 'hooks/useOutsideElementClick'
+import useWindowSize from 'hooks/useWindowSize'
+
 import BoardView from './BoradView'
 
 const shuffledImagePosition = [...IMAGE_POSITIONS]
@@ -14,10 +16,15 @@ const imageUrl = `/images/${shuffledImageData[imageRandomIndex]}.png`
 
 const BoardContainer = () => {
   const boardRef = useRef(null)
+  const windowSize = useWindowSize()
   const [selectedFirstBox, setSelectedFirstBox] = useState('')
   const [selectedSecondBox, setSelectedSecondBox] = useState('')
-  const [list, setList] = useState(shuffledImagePosition)
+  const [list, setList] = useState(IMAGE_POSITIONS)
   const [isCompleted, setIsCompleted] = useState(false)
+  const [isReady, setIsReady] = useState(true)
+  const [countdownTime, setCountdownTime] = useState(3000)
+
+  const isMobile = windowSize.width < 768
 
   const handleResetSelectedBoxes = () => {
     setSelectedFirstBox('')
@@ -46,6 +53,22 @@ const BoardContainer = () => {
   }
 
   useEffect(() => {
+    const myInterval = setInterval(() => {
+      if (countdownTime > 0) {
+        setCountdownTime(countdownTime - 1000)
+      }
+      if (countdownTime === 1000) {
+        clearInterval(myInterval)
+        setIsReady(false)
+        setList(shuffledImagePosition)
+      }
+    }, 1000)
+    return () => {
+      clearInterval(myInterval)
+    }
+  }, [countdownTime])
+
+  useEffect(() => {
     if (list && selectedFirstBox && selectedSecondBox) {
       const newList = moveArrayElement(list, selectedFirstBox, selectedSecondBox)
       setList(newList)
@@ -62,16 +85,22 @@ const BoardContainer = () => {
       setTimeout(() => {
         setIsCompleted(true)
       }, 250)
+    } else {
+      setIsCompleted(false)
     }
   }, [list])
 
   const viewProps = {
     boardRef,
+    countdownTime,
     handleClickBox,
     imageUrl,
     isCompleted,
+    isMobile,
+    isReady,
     list,
     selectedFirstBox,
+    windowSize,
   }
 
   return (

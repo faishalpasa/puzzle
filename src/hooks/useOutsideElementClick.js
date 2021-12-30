@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export default function useOutsideElementClick(ref, callBackFn) {
+const useOutsideElementClick = (ref, callBackFn) => {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -14,3 +14,5 @@ export default function useOutsideElementClick(ref, callBackFn) {
     }
   }, [ref, callBackFn])
 }
+
+export default useOutsideElementClick
