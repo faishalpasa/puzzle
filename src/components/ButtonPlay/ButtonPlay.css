@@ -1,0 +1,12 @@
+.button-play {
+  background: rgb(0, 255, 191);
+  border: unset;
+  border-radius: 4px;
+  font-size: 32px;
+  cursor: pointer;
+  padding: 16px;
+}
+
+.button-play:active {
+  background: rgba(0, 255, 191, 0.5);
+}
