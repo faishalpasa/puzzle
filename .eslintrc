@@ -46,6 +46,7 @@
         "functions": false 
       }
     ],
+    "react/require-default-props": 0,
     "react/function-component-definition": [1, {
       "namedComponents": "arrow-function",
       "unnamedComponents": "arrow-function"
